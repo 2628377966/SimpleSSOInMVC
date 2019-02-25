@@ -1,1 +1,2 @@
 # SimpleSSOInMVC
+在不借助ID3的情况下，仅仅使用Session,Cookie机制实现简单的单点登录和登出
