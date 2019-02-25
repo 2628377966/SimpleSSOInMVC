@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>WebNew1</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+@*<script type="text/javascript">
+　　/*url参数辅助方法，此处用来获取url回传的一次性密钥参数值*/
+    function querystring(key, val) {
+        var s = window.location.search.substr(1).split('&');
+        var obj = {};
+        for (var k in s) {
+            if (s[k].indexOf('=') >= 0) {
+                var temp = s[k].split('=');
+                obj[temp[0]] = temp[1];
+            }
+        }
+        if (arguments.length >= 2) {
+            obj[key] = val;
+            s = "";
+            for (var o in obj) {
+                s = s + '&' + o + '=' + obj[o];
+            }
+            return s.replace('&', '?');
+        } else {
+            return obj[key];
+        }
+    }
+　　
+　　
+　　/*用token跨域获取用户信息*/
+    function identityByToken(token) {
+        $.getJSON('http://localhost:49730/Home/Identity?callback=?', { token: token }, function (d) {
+            alert(d.Result.Name + "检测到SSO登录");
+　　　　　　　//...todo
+        });
+    }
+　　
+　　
+　　/*用密钥获取用户信息（先跨域获取token，然后调用token获取）*/
+    function identityByCert(cert) {
+        $.getJSON("http://localhost:49730/Home/Token?callback=?", { cert: cert }, function (d) {
+            if (d.State == 1) {
+                $.post("/Home/UpdateToken?token=" + d.Token);//成功获取token，ajax提交给分站后台存储，下次访问直接可获取到token
+                identityByToken(d.Token);
+            } else {//失败则跳转至授权登录页获取一次性密钥
+                window.location = 'http://localhost:49730/Home/Login?returnurl=' + window.location;
+            }
+        });
+    }
+
+    if (!!'@(ViewBag.Token)') {//有令牌
+        identityByToken('@(ViewBag.Token)');
+    } else {
+        if (!!querystring('cert')) {//有一次性key
+            identityByCert(querystring('cert'));
+        } else {//失败则跳转至授权登陆页（注意将本页url作为returnurl参数传递给了授权页，授权登录页经过处理会把密钥作为参数回传重定向到本页面）
+            window.location = 'http://localhost:49730/Home/Login?returnurl=' + window.location;
+        }
+    }
+</script>*@

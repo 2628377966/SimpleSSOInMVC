@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div>
+    <form action="@Url.Action("Login")" method="post" >
+        用户名： <input type="text" id="UserName" name="UserName" />
+        密码： <input type="password" id="Password" name="Password" />
+        <input type="hidden" id="ReturnUrl" name="ReturnUrl"  value="@(ViewBag.ReturnUrl as string)"/>
+        <button type="submit">登录</button>
+    </form>
+  
+</div>
+
+
+@*<script>
+    $("#btn_save").click(function () {
+        var returnUrl = @(ViewBag.ReturnUrl as string)
+        $.post("@Url.Action("Login")", { username: $("#UserName").val(), password: $("#Password").val(), returnUrl: returnUrl }, function (res) {
+            if (res.Flag) {
+                alert("登录成功")
+            }
+        })
+    })
+
+
+</script>*@
